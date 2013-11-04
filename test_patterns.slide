@@ -6,19 +6,17 @@ Tags: testing, patterns,
 Brandon Keene
 Microsoft
 bkeene@microsoft.com
-http://groupme.com/
+http://groupme.com
 
 * About me
 
 - Server Engineer at GroupMe
 - GroupMe is a cross-platform group messaging app
 - Download it at [[http://groupme.com/app][groupme.com/app]]
-- It is (partially) powered by Go!
+- GroupMe is (partially) powered by Go!
 - We're hiring! [[http://groupme.com/jobs][groupme.com/jobs]]
 
-* "testing" package
-
-* A simple test
+* Using the testing package
 
 .code -numbers hello_test.go
 
@@ -104,19 +102,19 @@ From the Go FAQ [[http://golang.org/doc/faq#testing_framework]["Where is my favo
 
 The `testing` package does not have mocks, doubles, stubs or anything fancy.
 
-We can acheive the same result by using interfaces.
+We can acheive similar results by using interfaces.
 
-Interfaces allow us to substitute test objects. Fake objects let us easily trigger error and success.
+Interfaces allow us to substitute test objects. Fake objects can simulate error and success.
 
-This helps decouple tests in other packages (or distant parts of the same package) without worrying about the concrete implementation behinf the real interface.
+This helps decouple other packages (or distant parts of the same package) from concrete implementations and dependencies.
 
 * Using interfaces
 
-Assume we have some object that uses a database.
-
-Life would be much easier if we didn't have to actually communicate with (and set up, and tear down) a real database.
+We care more about the behavior of `Finder` and less about actual database communication.
 
 .code -numbers interface_code.go
+
+(Note: you should still test real database use)
 
 * Using interfaces
 
@@ -158,7 +156,31 @@ That said, let's get weird with it!
 
 * assert
 
+[[https://github.com/bmizerany/assert][https://github.com/bmizerany/assert]]
+
+- Similar to assertions in other languages
+- Not much code, really more of an example or proof-of-concept
+
+* assert
+
+.code -numbers assert_test.go
+
+Output:
+
+.code assert_test.out
+
 * gocheck
+
+[[http://labix.org/gocheck][http://labix.org/gocheck]]
+[[http://godoc.org/launchpad.net/gocheck][http://godoc.org/launchpad.net/gocheck]]
+
+- Richer test helpers: assertions which interrupt the test immediately, deep multi-type comparisons, string matching, etc
+- Suite-based grouping of tests
+- Fixtures: per suite and/or per test set up and tear down
+
+* gocheck
+
+.code -numbers gocheck_test.go
 
 * Ginko and Gomega
 
@@ -183,6 +205,7 @@ That said, let's get weird with it!
 
 - Standard library testing package - [[http://golang.org/pkg/testing][http://golang.org/pkg/testing]]
 - Twelve Go Best Practices - [[http://talks.golang.org/2013/bestpractices.slide][http://talks.golang.org/2013/bestpractices.slide]]
+- Go Testing Toolbox - [[http://nathany.com/go-testing-toolbox/][http://nathany.com/go-testing-toolbox/]]
 
 
 
