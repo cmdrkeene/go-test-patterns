@@ -42,7 +42,7 @@ Go is all about explict error handling and tests are no different.
 
 .code -numbers weather_error_test.out
 
-The `T.Error()` function displays the error and continues execution.
+The `T.Error` function displays the error and continues execution.
 
 `weather` was also incorrect but we have no idea what value was returned.
 
@@ -74,19 +74,100 @@ Err, what?
 
 They look semantically equivalent but remember they're different objects!
 
-We can use `reflect` to perform a more useful comparison.
+We can use `reflect.DeepEqual` to perform a more useful comparison.
 
-* Using reflect
+* Using reflect.DeepEqual
 
 .code struct_reflect_test.go
 
-Using `reflect.DeepEqual` is also very useful for arrays, slices, and maps.
+Using `reflect.DeepEqual` is also very useful for comparing arrays, slices, and maps.
 
-* Helps avoid pedantic comparisons
+* Using reflect.DeepEqual
 
 .code crazy_compare_test.go
 
 Clearly would work, but it's needlessly verbose.
 
 Possibly useful if you're comparing a subset of fields.
+
+* Table driven tests
+
+"If the amount of extra code required to write good errors seems repetitive and overwhelming, the test might work better if table-driven, iterating over a list of inputs and outputs defined in a data structure"
+
+From the Go FAQ [[http://golang.org/doc/faq#testing_framework]["Where is my favorite helper function for testing?"]]
+
+* Table driven tests
+
+.code -numbers table_driven_test.go
+
+* Interface types
+
+Define an interface to allow easy substitution of test objects.
+
+.code -numbers interface_test.go
+
+* Redefine functions in tests
+
+* Testing web servers with net/http/httptest
+
+* Write your own test helper packages
+
+Extract commonly used fake objects or comparison helpers into a test package.
+
+The *<package>/<package><test>* naming scheme is great for avoiding messy import statements.
+
+* Other frameworks and tools
+
+* A word of warning
+
+"[Go] lacks features provided in other language's testing frameworks such as assertion functions."
+
+"...testing frameworks tend to develop into *mini-languages* *of* *their* *own*, with conditionals and controls and printing mechanisms, but Go already has all those capabilities; *why* *recreate* *them* ?"
+
+"We'd rather *write* *tests* *in* *Go*; it's one fewer language to learn and the approach keeps the tests straightforward and easy to understand.”
+
+From the Go FAQ [[http://golang.org/doc/faq#testing_framework]["Where is my favorite helper function for testing?"]]
+
+* Don't fight the standard
+
+There are *thousands* of idiomatic go tests in the standard library.
+
+They test some pretty complex stuff too.
+
+By using your own framework you're ignoring this excellent and prescriptive body of examples.
+
+My opinion: *Embrace* *the* *Go* *way*.
+
+That said, let's get weird with it!
+
+* assert
+
+* gocheck
+
+* Ginko and Gomega
+
+[[https://github.com/onsi/ginkgo][https://github.com/onsi/ginkgo]]
+[[https://github.com/onsi/gomega][https://github.com/onsi/gomega]]
+
+- BDD-style testing framework and matcher library
+- Pretty test runner
+- Shared setup and teardown
+- Nested contexts
+- Created by Pivotal Labs
+
+* Ginko and Gomega
+
+.code ginko_gomega_test.go
+
+* Ginko and Gomega
+
+.image ginko_gomega_test.jpg
+
+* Resources
+
+- Standard library testing package - [[http://golang.org/pkg/testing][http://golang.org/pkg/testing]]
+- Twelve Go Best Practices - [[http://talks.golang.org/2013/bestpractices.slide][http://talks.golang.org/2013/bestpractices.slide]]
+
+
+
 
