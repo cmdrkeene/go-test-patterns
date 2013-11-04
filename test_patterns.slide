@@ -100,9 +100,25 @@ From the Go FAQ [[http://golang.org/doc/faq#testing_framework]["Where is my favo
 
 .code -numbers table_driven_test.go
 
-* Interface types
+* Using interfaces
 
-Define an interface to allow easy substitution of test objects.
+The `testing` package does not have mocks, doubles, stubs or anything fancy.
+
+We can acheive the same result by using interfaces.
+
+Interfaces allow us to substitute test objects. Fake objects let us easily trigger error and success.
+
+This helps decouple tests in other packages (or distant parts of the same package) without worrying about the concrete implementation behinf the real interface.
+
+* Using interfaces
+
+Assume we have some object that uses a database.
+
+Life would be much easier if we didn't have to actually communicate with (and set up, and tear down) a real database.
+
+.code -numbers interface_code.go
+
+* Using interfaces
 
 .code -numbers interface_test.go
 
@@ -151,7 +167,7 @@ That said, let's get weird with it!
 
 - BDD-style testing framework and matcher library
 - Pretty test runner
-- Shared setup and teardown
+- Shared set up and tear down
 - Nested contexts
 - Created by Pivotal Labs
 
