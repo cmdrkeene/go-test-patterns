@@ -62,7 +62,7 @@ This is super helpful when the test fails months or years from now.
 
 * Comparing structs
 
-We often need to compare richer data structures.
+An example using a richer data structure.
 
 .code struct_test.go
 
@@ -74,21 +74,21 @@ Err, what?
 
 They look semantically equivalent but remember they're different objects!
 
-We can use `reflect.DeepEqual` to perform a more useful comparison.
+Let's break this out to see what's wrong.
 
-* Using reflect.DeepEqual
-
-.code struct_reflect_test.go
-
-Using `reflect.DeepEqual` is also very useful for comparing arrays, slices, and maps.
-
-* Using reflect.DeepEqual
+* Comparing structs
 
 .code crazy_compare_test.go
 
 Clearly would work, but it's needlessly verbose.
 
-Possibly useful if you're comparing a subset of fields.
+We can use `reflect.DeepEqual` to perform a more compact comparison.
+
+* Comparing structs
+
+.code struct_reflect_test.go
+
+Protip: this also works for arrays, slices, and maps.
 
 * Table driven tests
 
