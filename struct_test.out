@@ -1,0 +1,6 @@
+$ go test struct_test.go
+--- FAIL: TestCurrentWeather (0.00 seconds)
+  struct_test.go:18: expected &{72 Sunny 2013-11-05 16:20:00 +0000 UTC}
+  struct_test.go:19: actual   &{72 Sunny 2013-11-05 16:20:00 +0000 UTC}
+FAIL
+FAIL  command-line-arguments  0.016s

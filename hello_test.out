@@ -1,0 +1,2 @@
+$ go test hello_test.go
+ok    command-line-arguments  0.017s

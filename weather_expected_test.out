@@ -1,0 +1,6 @@
+$ go test weather_expected_test.go
+--- FAIL: TestCurrentWeather (0.00 seconds)
+  weather_expected_test.go:13: expected 72°F, Sunny
+  weather_expected_test.go:14: actual   40°F, Raining
+FAIL
+FAIL  command-line-arguments  0.015s

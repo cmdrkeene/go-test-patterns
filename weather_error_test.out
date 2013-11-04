@@ -1,0 +1,6 @@
+$ go test weather_error_test.go
+--- FAIL: TestCurrentWeather (0.00 seconds)
+  weather_error_test.go:8: doppler radar offline
+  weather_error_test.go:12: current weather incorrect
+FAIL
+FAIL  command-line-arguments  0.015s

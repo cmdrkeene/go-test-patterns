@@ -1,0 +1,92 @@
+Test Patterns in Go
+New York City Golang Meetup
+15:04 5 Nov 2013
+Tags: testing, patterns,
+
+Brandon Keene
+Microsoft
+bkeene@microsoft.com
+http://groupme.com/
+
+* About me
+
+- Server Engineer at GroupMe
+- GroupMe is a cross-platform group messaging app
+- Download it at [[http://groupme.com/app][groupme.com/app]]
+- It is (partially) powered by Go!
+- We're hiring! [[http://groupme.com/jobs][groupme.com/jobs]]
+
+* "testing" package
+
+* A simple test
+
+.code -numbers hello_test.go
+
+Run it:
+
+.code hello_test.out
+
+Woo it passed!
+
+* Error checking
+
+.code -numbers weather_error_test.go
+
+Most real functions will return some sort of error.
+
+You *must* handle this in your test.
+
+Go is all about explict error handling and tests are no different.
+
+* Error checking
+
+.code -numbers weather_error_test.out
+
+The `T.Error()` function displays the error and continues execution.
+
+`weather` was also incorrect but we have no idea what value was returned.
+
+Let's modify the test to display this information.
+
+* Expected and actual
+
+.code -numbers weather_expected_test.go
+
+* Expected and actual
+
+Compared values are now clearly visible in test output.
+
+.code weather_expected_test.out
+
+This is super helpful when the test fails months or years from now.
+
+* Comparing structs
+
+We often need to compare richer data structures.
+
+.code struct_test.go
+
+* Comparing structs
+
+.code struct_test.out
+
+Err, what?
+
+They look semantically equivalent but remember they're different objects!
+
+We can use `reflect` to perform a more useful comparison.
+
+* Using reflect
+
+.code struct_reflect_test.go
+
+Using `reflect.DeepEqual` is also very useful for arrays, slices, and maps.
+
+* Helps avoid pedantic comparisons
+
+.code crazy_compare_test.go
+
+Clearly would work, but it's needlessly verbose.
+
+Possibly useful if you're comparing a subset of fields.
+
