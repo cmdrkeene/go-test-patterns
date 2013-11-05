@@ -179,7 +179,13 @@ Defintely useful in the plural case.
 
 .code -numbers memory_test.go
 
-* Test servers with net/http/httptest
+* Using net/http/httptest
+
+.code -numbers net_http_httptest_recorder.go
+
+* Using net/http/httptest
+
+.code -numbers net_http_httptest_server.go
 
 * Test helper packages
 
@@ -187,7 +193,7 @@ Defintely useful in the plural case.
 - Use the `<package>/<package>test` naming scheme to avoid conflicts
 - Useful for external package users too
 
-* Other frameworks and tools
+* Other frameworks
 
 * A word of warning
 
