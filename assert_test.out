@@ -1,6 +1,0 @@
-$ go test
---- FAIL: TestAsserts (0.00 seconds)
-  assert.go:15: point_test.go:12 assert.go:24: ! X: 1 != 2 FAIL
-FAIL
-FAIL  command-line-arguments  0.016s
-

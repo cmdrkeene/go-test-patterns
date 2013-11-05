@@ -154,21 +154,6 @@ My opinion: *Embrace* *the* *Go* *way*.
 
 That said, let's get weird with it!
 
-* assert
-
-[[https://github.com/bmizerany/assert][https://github.com/bmizerany/assert]]
-
-- Similar to assertions in other languages
-- Not much code, really more of an example or proof-of-concept
-
-* assert
-
-.code -numbers assert_test.go
-
-Output:
-
-.code assert_test.out
-
 * gocheck
 
 [[http://labix.org/gocheck][http://labix.org/gocheck]]
