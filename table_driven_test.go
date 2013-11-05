@@ -1,5 +1,4 @@
 // Adapted from src/pkg/fmt/fmt_test.go
-
 var fmttests = []struct {
   fmt string
   val interface{}

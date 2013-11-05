@@ -6,15 +6,23 @@ Tags: testing, patterns,
 Brandon Keene
 Microsoft
 bkeene@microsoft.com
-http://groupme.com
+http://github.com/cmdrkeene
 
 * About me
 
-- Server Engineer at GroupMe
+- Engineer at GroupMe
 - GroupMe is a cross-platform group messaging app
-- Download it at [[http://groupme.com/app][groupme.com/app]]
 - GroupMe is (partially) powered by Go!
+- Download it at [[http://groupme.com/app][groupme.com/app]]
 - We're hiring! [[http://groupme.com/jobs][groupme.com/jobs]]
+
+* Disclaimer
+
+- Views expressed are my own, not Microsoft's
+- Many ideas borrowed from other people (see Resources slide)
+- Very cursory overview of the topic
+- A lot of code is omitted for brevity
+- Please feel free to heartily agree or disagree with me afterward :)
 
 * Using the testing package
 
@@ -32,9 +40,7 @@ Woo it passed!
 
 Most real functions will return some sort of error.
 
-You *must* handle this in your test.
-
-Go is all about explict error handling and tests are no different.
+Go is all about explicit error handling and tests are no different.
 
 * Error checking
 
@@ -50,13 +56,19 @@ Let's modify the test to display this information.
 
 .code -numbers weather_expected_test.go
 
+The spacing around "actual" helps align output.
+
 * Expected and actual
 
 Compared values are now clearly visible in test output.
 
 .code weather_expected_test.out
 
-This is super helpful when the test fails months or years from now.
+A much more helpful error message.
+
+This is great when the test fails months or years from now.
+
+Future you will love past you for it.
 
 * Comparing structs
 
@@ -70,9 +82,9 @@ An example using a richer data structure.
 
 Err, what?
 
-They look semantically equivalent but remember they're different objects!
+They look semantically equivalent but remember they're different instances!
 
-Let's break this out to see what's wrong.
+How can we make sure they're equal?
 
 * Comparing structs
 
@@ -86,7 +98,7 @@ We can use `reflect.DeepEqual` to perform a more compact comparison.
 
 .code struct_reflect_test.go
 
-Protip: this also works for arrays, slices, and maps.
+This also works for arrays, slices, and maps.
 
 * Table driven tests
 
@@ -98,15 +110,14 @@ From the Go FAQ [[http://golang.org/doc/faq#testing_framework]["Where is my favo
 
 .code -numbers table_driven_test.go
 
+Struct literals are super useful.
+
 * Using interfaces
 
-The `testing` package does not have mocks, doubles, stubs or anything fancy.
-
-We can acheive similar results by using interfaces.
-
-Interfaces allow us to substitute test objects. Fake objects can simulate error and success.
-
-This helps decouple other packages (or distant parts of the same package) from concrete implementations and dependencies.
+- `testing` package does not have mocks or doubles
+- Interfaces help with Dependency Injection
+- Test objects can easily simulate error or success
+- Lets us focus on the unit
 
 * Using interfaces
 
@@ -114,21 +125,67 @@ We care more about the behavior of `Finder` and less about actual database commu
 
 .code -numbers interface_code.go
 
-(Note: you should still test real database use)
+(Note: you should still test real database interaction somewhere)
 
 * Using interfaces
 
 .code -numbers interface_test.go
 
+* Using interfaces
+
+For package level functions, use an underlying variable.
+
+Initialize the real value and swap it out in test.
+
+.code -numbers interface_context_code.go
+
+* Redefine functions
+
+- Go supports first class functions
+- Tests have access to package local functions
+- We can swap out the implementation of a function for testing
+
+* Redefine functions
+
+.code -numbers redefine_function_code.go
+
 * Redefine functions in tests
 
-* Testing web servers with net/http/httptest
+.code -numbers redefine_function_test.go
 
-* Write your own test helper packages
+* Shorthand test types
 
-Extract commonly used fake objects or comparison helpers into a test package.
+.code -numbers shorthand_code.go
 
-The *<package>/<package><test>* naming scheme is great for avoiding messy import statements.
+* Shorthand test types
+
+.code -numbers shorthand_test.go
+
+Not too useful in the singular case, but...
+
+* Shorthand test types
+
+.code -numbers shorthand_table_test.go
+
+Defintely useful in the plural case.
+
+* Memory allocation tests
+
+- Ensure resource constrained tasks do not exceed boundaries
+- Understand what your code is actually doing
+- Useful against performance regressions and memory leaks
+
+* Memory allocation tests
+
+.code -numbers memory_test.go
+
+* Test servers with net/http/httptest
+
+* Test helper packages
+
+- Extract commonly used fake objects or helpers into a test package
+- Use the `<package>/<package>test` naming scheme to avoid conflicts
+- Useful for external package users too
 
 * Other frameworks and tools
 
@@ -162,10 +219,16 @@ That said, let's get weird with it!
 - Richer test helpers: assertions which interrupt the test immediately, deep multi-type comparisons, string matching, etc
 - Suite-based grouping of tests
 - Fixtures: per suite and/or per test set up and tear down
+- Enhanced test output
+- And more!
 
 * gocheck
 
 .code -numbers gocheck_test.go
+
+* gocheck
+
+.code gocheck_test.out
 
 * Ginko and Gomega
 
@@ -173,10 +236,9 @@ That said, let's get weird with it!
 [[https://github.com/onsi/gomega][https://github.com/onsi/gomega]]
 
 - BDD-style testing framework and matcher library
-- Pretty test runner
 - Shared set up and tear down
 - Nested contexts
-- Created by Pivotal Labs
+- Enhanced test output (color!)
 
 * Ginko and Gomega
 
@@ -188,9 +250,14 @@ That said, let's get weird with it!
 
 * Resources
 
-- Standard library testing package - [[http://golang.org/pkg/testing][http://golang.org/pkg/testing]]
+Thanks to everyone below!
+
+- Go standard library (read the tests!) - [[http://golang.org/pkg][http://golang.org/pkg]]
+- testing package - [[http://golang.org/pkg/testing][http://golang.org/pkg/testing]]
+- net/http/httptest package - [[http://golang.org/pkg/net/http/httptest][http://golang.org/pkg/http/httptest]]
 - Twelve Go Best Practices - [[http://talks.golang.org/2013/bestpractices.slide][http://talks.golang.org/2013/bestpractices.slide]]
 - Go Testing Toolbox - [[http://nathany.com/go-testing-toolbox/][http://nathany.com/go-testing-toolbox/]]
+- "Dependency Injection" in Go - [[http://openmymind.net/Dependency-Injection-In-Go/][http://openmymind.net/Dependency-Injection-In-Go/]]
 
 
 

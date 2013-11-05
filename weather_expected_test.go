@@ -1,7 +1,3 @@
-package main
-
-import "testing"
-
 func TestCurrentWeather(t *testing.T) {
 	expected := "72°F, Sunny"
 	actual, err := CurrentWeather("New York, NY")

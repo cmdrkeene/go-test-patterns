@@ -1,7 +1,3 @@
-package main
-
-import "testing"
-
 func TestCurrentWeather(t *testing.T) {
 	weather, err := CurrentWeather("New York, NY")
 	if err != nil {
