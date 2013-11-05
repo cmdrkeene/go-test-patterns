@@ -11,8 +11,7 @@ type Lexer struct {
   source  string
 }
 
-func (l *Lexer) scan() []Token {
-  tokens := []Token{}
+func (l *Lexer) scan() (tokens []Token) {
   var t Token
   for t != EOF {
     t = l.tokenize(l.next())
