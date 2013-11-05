@@ -1,0 +1,18 @@
+$ go test
+
+----------------------------------------------------------------------
+FAIL: hello_test.go:16: S.TestHelloWorld
+
+hello_test.go:17:
+    c.Check(42, Equals, "42")
+... obtained int = 42
+... expected string = "42"
+
+hello_test.go:18:
+    c.Check(os.Errno(13), Matches, "perm.*accepted")
+... value os.Errno = 13 ("permission denied")
+... regex string = "perm.*accepted"
+
+OOPS: 0 passed, 1 FAILED
+--- FAIL: hello_test.Test
+FAIL
